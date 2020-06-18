@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba encriptado</title>
+</head>
+<body>
+    
+    <h1>ENCRIPTADO</h1>
+    <div id="encriptado">Cevzreb erfhryir ry ceboyrzn. Ragbaprf, rfpevor ry póqvtb</div>
+
+    <h1>DESENCRIPTADO</h1>
+    <p>Este es un cifrado César o de desplazamiento. EL desplazamiento es de <span id="numEncriptado"></span>. Resultado:</p>
+
+<b><i>   <div id="desencriptado"></div></b></i> 
+
+    <script >
+        
+let encriptado = document.getElementById("encriptado").innerText.toLowerCase();
+let desencriptado = "";
+let abc = "abcdefghijklmnopqrstuvwxyz";
+let abcDesencriptado = "";
+numEncriptado = 13;
+document.getElementById("numEncriptado").innerHTML=numEncriptado;
+
+
+
+for(let i = 0; i<abc.length; i++){
+
+    if(i+numEncriptado < abc.length){
+        abcDesencriptado += abc.charAt(i+numEncriptado);
+    }else{
+        abcDesencriptado += abc.charAt(i+numEncriptado - abc.length);
+    }
+}
+
+
+for(i = 0; i<encriptado.length; i++){
+    let letra = encriptado.charAt(i);
+let posicionAbc = abc.indexOf(letra);
+let letraDesen;
+if(posicionAbc > 0){
+if(posicionAbc <  abcDesencriptado.length){
+    letraDesen = abcDesencriptado.charAt(posicionAbc)
+}else{
+    letraDesen = abcDesencriptado.charAt(posicionAbc - abcDesencriptado.length)
+}
+}else{
+    letraDesen =  letra;
+}
+desencriptado +=   letraDesen;
+
+console.log(letra + "-- posicion: " + posicionAbc + "-- desencriptado: " + letraDesen);
+}
+
+
+
+
+let resultado = document.getElementById("desencriptado")
+
+
+resultado.innerHTML = desencriptado;
+    </script>
+</body>
+</html>

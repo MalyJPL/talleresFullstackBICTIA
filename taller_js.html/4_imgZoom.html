@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Imagen</title>
+    <style>
+
+img {
+    left:20%;
+    width:50%;
+}
+.control{
+border:none;
+background-color: linear-gradient(white,gray);
+color:black;
+font-size: 20px;
+left:30%;
+}
+    </style>
+</head>
+
+<body>
+    <div id="contenidoWeb"></div>
+
+    <script>
+        /*4. Por medio de JavaScript crear un efecto de zoom in y zoom out a una imagen, dicho
+        efecto debe ser controlado por un botón y el efecto debe tener una transición suave.*/
+        class Imagen {
+            constructor(id, url) {
+                this.id = id;
+                this.url = url;
+            }
+            ponerImagen() {
+                let imagen = document.createElement('img');
+                imagen.setAttribute('id', this.id);
+                imagen.setAttribute('src', this.url);
+                console.log(imagen);
+                return imagen
+            }
+            ponerControles(){
+                let controles = document.createElement('div');
+                let controlA = document.createElement('button');
+                controlA.setAttribute('class', 'control');
+                controlA.setAttribute('id', 'ampliar');
+                let contenido = document.createTextNode("Ampliar");
+                controlA.appendChild(contenido);
+                controles.appendChild(controlA);
+                let controlR = document.createElement('button');
+                controlR.setAttribute('class', 'control');
+                controlR.setAttribute('id', 'reducir');
+                contenido = document.createTextNode("Reducir");
+                controlR.appendChild(contenido);
+                controles.appendChild(controlR);
+                console.log(controles)
+                return controles
+            }
+        }
+
+function zoomAmp(id){
+    ampliar(id);
+}
+let cont=0;
+       function ampliar(id) {
+        cont++;
+            let img = document.getElementById(id);
+            let currWidth = img.clientWidth; 
+            img.style.width = (currWidth + 1) + "px"; 
+            if (cont === 20 ){
+                   clearInterval(intervalo);
+               }
+                    }
+        function reducir(id) {
+            cont++;
+            let img = document.getElementById(id)
+            let currWidth = img.clientWidth; 
+            img.style.width = (currWidth - 1) + "px"; 
+            if (cont === 20 ){
+                   clearInterval(intervalo);
+               }
+                 
+        }
+        
+        let imagen1 = new Imagen('Uno', 'https://www.vozpopuli.com/2018/06/19/altavoz/cultura/Maria-Callas-fotografiada-Cecil-Beaton_1146495340_11536954_1020x574.jpg');
+        
+        contenido = document.getElementById("contenidoWeb");
+        contenido.appendChild(imagen1.ponerControles());
+        contenido.appendChild(imagen1.ponerImagen());
+
+
+
+document.getElementById("ampliar").onclick = function(){
+    cont = 0;
+   intervalo =  setInterval(ampliar,1,imagen1.id);
+}
+document.getElementById("reducir").onclick = function(){
+    cont = 0;
+   intervalo = setInterval(reducir,1,imagen1.id);
+}
+
+    </script>
+
+</body>
+
+</html>

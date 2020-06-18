@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller básico semana santa</title>
+    <style>
+       body{
+background-color: blanchedalmond;
+       }
+       li{
+            text-align: justify;
+            padding: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <ol>
+        <li> Crear un algorítmo que indique si el número ingresado por el usuario es positivo o negativo</li>
+        <input id="pregUno" type="number" placeholder="ingrese su número"></input>
+        <button onclick="esnumero()">Tipo de número</button>
+        <p id=rtaUno></p>
+        <li>El usuario debe ingresar el número de personas que quiera ingresar sus respectivas edades. Crear un que
+            saque la suma total de edades y el promedio de edad respecto
+            a la cantidad de personas ingresas por el usuario. Los resultados se deben mostrar
+            en un alert y la operación matemática en la consola. <br>
+            <button onclick="promEdades()">Promedio de edades</button>
+        </li>
+        <li>
+            Crear un cronómetro que inicie automáticamente y que máximo llegue a un minuto
+            <button onclick="cronometro()">Activar cronómetro</button>
+            <p id="cronometro"></p>
+        </li>
+        <li>
+            El usuario desea ingresar una palabra y quiere saber cuantas vocales tiene. Crear
+            un algoritmo que ralice dicha función.<br>
+            <input id="palabrasVocales" type="text" placeholder="escriba su palabra">
+            <button onclick="vocales()">calcular vocales</button>
+            <p id=rtaVocales></p>
+        </li>
+        <li>Realizr un algoritmo que permita calcular el área de cualquiera de las siguientes figuras geométricas:
+            '<select id="opciones">'
+                <option value="">- Selecciona una figura -</option>
+                <option value="1">Cuadrado</option>
+                <option value="2">Rectángulo</option>
+                <option value="3">Triángulo</option>
+                <option value="4">Círculo</option>
+                + '
+            </select>
+            <div id="pedirDatos"></div>
+        </li>
+        <li>
+            Cinco cajeros realizan su joranada laboral de 8 horas diarias. Al trabajar
+            80 días el supermercado desea hacerles saber lo siguiente: <br>
+            -Total de ventas de todos lo cajeros <br>
+            -Quien fue el cajero que vendió más (total de ventas de un solo cajero)<br>
+            - En que día se vendió más y quien fue el cajero responsable ese día <br>
+            - Mostrar el cajero que menos ventas hizo en el día 60<br>
+            - Mostrar el mejor y el peor cajero del día 30.<br>
+            <a href="taller3_avanEj1.html">Ir al ejercicio</a>
+        </li>
+        <li>
+            Imprimir todos los números que sean múltiplos de 8 hasta llegar al valor de 500.
+            Si se llega al límite de 500 y no existe ningún múltiplo de 8, indicar por medio de un mensaje al
+            usuario "Lo sentimos, no existe un numero menor que 500 que sea múltipo de 8"
+            <button onclick="mulOcho()">Imprimir múltiplos</button>
+            <div id="rtaNums"></div>
+        </li>
+        <li>
+            Dibujar patrones usando ciclos.
+            <div><span id="cicloUno"></span><span id="cicloDos"></span></div>
+            <input id="largo" type="number" placeholder="introduzca tamaño">
+            <button onclick="cicloTres()">Imprimir su figura</button>
+            <div id="cicloTres"></div>
+        </li>
+    </ol>
+
+    <script>
+        //variables reusables
+        var i, content
+
+        //Ejercicio 1
+        function esnumero() {
+            let num = document.getElementById("pregUno").value;
+            if (num < 0) {
+                document.getElementById("rtaUno").innerHTML = "Es un número negativo";
+            } else if (num > 0) {
+                document.getElementById("rtaUno").innerHTML = "Es un número positivo";
+            } else if (num == 0) {
+                document.getElementById("rtaUno").innerHTML = "Es 0";
+            }
+        }
+
+        //Ejercicio 2
+        function promEdades() {
+            let personas = parseInt(prompt("ingrese el número de personas"));
+            let edad, totalEd = 0
+            for (i = 0; i < personas; i++) {
+                edad = parseInt(prompt("ingrese la edad"));
+                console.log(edad + ",");
+                totalEd += edad;
+            }
+            console.log(`Suma = ${totalEd}. Promedio: ${totalEd} / ${i} = ${totalEd / i}`)
+            alert(`La suma de edades es ${totalEd} y el promedio es ${Math.floor(totalEd / i)}`)
+        }
+
+        //Ejercicio 3
+        var imprimir, cont = 0
+        function cronometro() {
+            imprimir = setInterval(imprimirCronometro, 1000);
+        }
+
+        function imprimirCronometro() {
+            cont++
+            document.getElementById("cronometro").innerHTML = '00:00:' + cont;
+            if (cont === 60) {
+                document.getElementById("cronometro").innerHTML = '00:01:00';
+                clearInterval(imprimir)
+            }
+        }
+
+        //Ejercicio 4
+        function vocales() {
+            let pal = document.getElementById("palabrasVocales").value;
+            pal = pal.split("");
+            let vocales = ["a", "e", "i", "o", "u"];
+            let numVoc = 0;
+
+            vocales.forEach(vocal => {
+                for (i = 0; i < pal.length; i++) {
+                    if (pal[i] === vocal) {
+                        numVoc++
+                    }
+                }
+            });
+
+            document.getElementById("rtaVocales").innerHTML = "El número de vocales es " + numVoc;
+        }
+
+        //Ejercicio 5
+
+
+
+        document.getElementById('opciones').addEventListener('click', function () {
+            let figura = document.getElementById("opciones").selectedIndex
+       
+            if (figura == "1") {
+                document.getElementById("pedirDatos").innerHTML = 'Lado: <input id="ladoA">'
+            }
+            if (figura == "2") {
+                document.getElementById("pedirDatos").innerHTML = 'Alto: <input id="ladoA"> - Ancho: <input id="ladoB">'
+            }
+            if (figura == "3") {
+                document.getElementById("pedirDatos").innerHTML = 'Alto: <input id="ladoA"> - Base: <input id="ladoB">'
+            }
+            if (figura == "4") {
+                document.getElementById("pedirDatos").innerHTML = 'Radio: <input id="ladoA">'
+            }
+
+            let area = calcularArea();
+            document.getElementById("pedirDatos").innerHTML += `<button onclick="imprimirArea()">Calcular área</button>`
+        })
+
+        function calcularArea() {
+            let area, ladoA, ladoB
+            let figura = document.getElementById("opciones").selectedIndex
+            ladoA = Number(document.getElementById("ladoA").value);
+       
+            if (figura == "1") {
+                area = (ladoA) * (ladoA);
+            }
+            if (figura == "2") {
+                ladoB = Number(document.getElementById("ladoB").value);
+                area = (ladoA) * (ladoB);
+            }
+            if (figura == "3") {
+                ladoB = Number(document.getElementById("ladoB").value);
+                area = (ladoA) * (ladoB) / 2;
+            }
+            if (figura == "4") {
+                area = Math.round(100 * Math.PI * ladoA * ladoA) / 100;
+
+            }
+            return area
+        }
+
+        function imprimirArea(figura) {
+            let area = calcularArea(figura);
+            document.getElementById("pedirDatos").innerHTML += `<br>El área de su figura es ${area}`
+        }
+
+//Ejercicio 6 - en otra hoja
+
+//Ejercicio 7
+function mulOcho(){
+    content = ""
+    for(i=1; i<=500; i++)
+    if(i%8===0){
+content+=i+' |'
+    }   
+     else if(i===500 & content === ""){
+    content="Lo sentimos, no existe un numero menor que 500 que sea múltipo de 8"
+    }
+    
+document.getElementById("rtaNums").innerHTML='Múltiplos de 8 menores a 500:<br>'+content+'<br>'
+}
+
+//Ejercicio 8
+content="";
+let linea="*";
+
+for(i=0;i<=3;i++){
+    content+=linea;
+    content+='<br>'
+    linea +="**";
+}
+for(i=0;i<=3;i++){
+    linea = linea.substr(1,linea.length-2)
+    content+=linea;
+    content+='<br>';
+}
+
+document.getElementById("cicloUno").innerHTML='<br>'+content+'<br>'
+
+let content2="";
+linea="*********";
+for(i=0;i<=3;i++){
+    linea = linea.substr(1,linea.length-2)
+    content2+=linea;
+    content2+='<br>';
+}
+for(i=0;i<=3;i++){
+    content2+=linea;
+    content2+='<br>'
+    linea +="**";
+}
+
+
+document.getElementById("cicloDos").innerHTML='<br>'+content2+'<br>'
+
+function cicloTres(){
+    let largo = Number(document.getElementById("largo").value)
+    let content3=""
+let str ="*"
+for (i=0; i<largo; i++){
+content3 += str.repeat(largo-i) + '<br>'
+}
+document.getElementById("cicloTres").innerHTML='<br>'+content3+'<br>'
+}
+
+    </script>
+</body>
+
+</html>

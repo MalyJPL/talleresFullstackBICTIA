@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Mask</title>
+    <script src="https://kit.fontawesome.com/e8e5db5c9d.js" crossorigin="anonymous"></script>
+    <style>
+        #marco {
+            position: absolute;
+            top: 0px;
+            left: 201px;
+            z-index: 0;
+            background-image: url(https://4.bp.blogspot.com/_0eC4K-qZ7AM/Sx1VvuxaaVI/AAAAAAAAK10/K3ZBdN7g2os/s1600/tv.jpg);
+        }
+
+        #video {
+            position: absolute;
+            top: 76px;
+            left: 240px;
+            z-index: 1;
+        }
+        
+        #controles{
+            position:absolute;
+            top:258px;
+            left: 280px;
+            z-index: 1;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="reproductor">
+        <!-- máscara -->
+        <div id="marco"><img
+                src="https://4.bp.blogspot.com/_0eC4K-qZ7AM/Sx1VvuxaaVI/AAAAAAAAK10/K3ZBdN7g2os/s1600/tv.jpg">
+        </div>
+        <!-- video -->
+        <div id="divideo">
+            <video id="video" src="https://www.w3schools.com/html/mov_bbb.mp4" controls>
+                Tu navegador no implementa el elemento <code>video</code>. </video>
+
+            <!-- botones del video -->
+            <div id="controles">
+                <button id="play">P<i class="fas fa-play"></i></button>
+                <button id="stop">S<i class="fas fa-stop"></i></button>
+                <button id="back">B<i class="fas fa-backward"></i></button>
+                <button id="ford">F<i class="fas fa-forward"></i></button>
+                <button id="vup">+<i class="fas fa-volume-up"></i></button>
+                <button id="vdown">-<i class="fas fa-volume-down"></i></button>
+                <button id="vmute">X<i class="fas fa-volume-mute"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+/*Apoyado en JavaScript crear una máscara de reproducción que nos permita manipular
+un elemento multimedia de la siguiente forma:
+- Crear un documento .html que contenga un video
+- Por medio de JavaScript permitir que el volumen sea manipulable. (Subir, bajar,
+mute)
+- Debe permitir adelantar y atrasar el video a placer.*/
+
+        //traer video y botones a variables JavaScript
+
+        let video = document.getElementById("video");
+        let btnPlay = document.getElementById("play")
+        let btnStop = document.getElementById("stop")
+        let btnBack = document.getElementById("back")
+        let btnForw = document.getElementById("ford")
+        let btnVUp = document.getElementById("vup")
+        let btnVDown = document.getElementById("vdown")
+        let btnVmute = document.getElementById("vmute")
+
+        //añadir eventos al dar click en los botones
+        btnPlay.addEventListener('click', () => {
+            video.play();
+        })
+
+        btnStop.addEventListener('click', () => {
+            video.pause();
+        })
+
+        btnBack.addEventListener('click', () => {
+            video.currentTime -= 2;
+        })
+
+        btnForw.addEventListener('click', () => {
+            video.currentTime += 2;
+        })
+
+//funciones de sonido
+        btnVUp.addEventListener('click', () => {
+            video.volume += 0.1;
+        })
+
+        btnVDown.addEventListener('click', () => {
+            video.volume -= 0.1;
+        })
+
+        btnVmute.addEventListener('click', () => {
+            video.volume = 0;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller 1 Javascript</title>
+</head>
+<body>
+    
+<script>
+
+    var i=0
+    
+    let ejer = prompt(`Especifique cual es su ejercicio`)
+    
+    switch(ejer){
+case "1":
+    alert(
+        `Pepe desea saber cúal será su calificación final
+        en la materia de Lógicad e Programación y Algoritmos.
+        Dicha calificación se compone de los siguientes porcentajes:
+        - 55% promedio de tres parciales
+        - 30% Examen Final
+        -15% Trabajo Final`
+    )
+
+    let nota, temp
+
+    nota = 0.55/3*(Number(prompt("Escriba la nota del primer parcial")));
+    nota += 0.55/3*(Number(prompt("Escriba la nota del segundo parcial")));
+    nota += 0.55/3*(Number(prompt("Escriba la nota del tercer parcial")));
+    nota += 0.3*(Number(prompt("Escriba la nota del examen final")));
+    nota += 0.15*(Number(prompt("Escriba la nota del trabajo final")));
+    nota = Math.round(nota*100)/100;
+alert(`La nota final de Pepe es ${nota}`)
+    
+break;
+
+case "2":
+alert(
+    `Crear un algoritmo en el cual el usuario tenga que adivinar un número.
+    Este número lo creará el sistema al azar. El usuario tiene
+    solo 10 intentos y el sistema debe mostrar si el
+    usuario está cerca o lejos de dar con el número programado
+    por el sistema`
+)
+
+let win = Math.round(Math.random()*(100-1));
+let guess
+
+for(i=0; i<10; i++){
+guess = Number(prompt(`¿cúal es su apuesta?`))
+if (guess === win){
+    alert("ganaste");
+    i=10;
+}else if(guess<win){
+alert(`El número es mayor. Le quedan ${9-i} intentos`)
+}else if(guess>win){
+alert(`El número es menor. Le quedan ${9-i} intentos`)
+}
+}
+alert(`El numero es ${win}.`);
+
+break;
+case '3':
+let next, impar=0, numbs = new Array;
+do{
+    numbs.push(Number(prompt('escriba un número')));
+    next = confirm('¿Quiere continuar?')
+}while(next)
+
+for(i=0; i<numbs.length;i++){
+    if(numbs[i]%2 !== 0){
+        impar++
+        }
+        }
+
+
+impar = Math.round(impar/numbs.length*100)
+
+alert(`El porcentaje de pares es ${100-impar}%, el de impares ${impar}%`)
+
+break;
+case "4":
+
+alert(`crear un algoritmo que imprima los números
+del 1 al 100 y del 100 al 200. El usuario debe escoger la opción a imprimir`)
+
+let op = prompt(`introduzca su opción:
+ Escriba 1 para imprimir del 1 al 100
+ Escriba 2 para imprimir los números de 101 al 200`)
+
+let nums = new Array
+
+switch(op) {
+    case '1':
+    for (i = 1; i<=100; i++){
+    nums[i-1]=i;
+}
+    alert(`los números: ${nums}`);
+    break;
+    case '2':
+    for (i = 101; i<=200; i++){
+    nums[i-1]=i;
+}    alert(`los números: ${nums}`);
+break;
+    default:
+    alert(`opción no válida`)
+break;
+}
+
+break;
+case "5":
+
+let pal,rev = prompt("introduzca su palíndromo");
+pal=rev;
+pal = pal.split("");
+rev = rev.split("");
+rev.reverse();
+pal = pal.join("");
+rev = rev.join("");
+
+if(pal === rev ){
+    alert(`es un palíndromo`)}
+    else{
+        alert(`no es un palíndromo`)
+        }
+
+break;
+
+case "6":
+
+alert(`Crear un algoritmo que almacene una lista
+de nombres en un arreglo y luego ordenarlos alfabéticamente.
+No se sabe la cantidad de datos que se ingresarán. Se ingresa
+una lista de nombres (la lista termina cuando se ingresa 
+un espacio en blanco) si se repite un nombre, el sistema debe 
+mostrar un mensaje indicando al usuario que no debe
+repetir nombres y continuar con la lista
+`);
+
+let name, names = new Array
+
+while(name != " "){
+    name = prompt(`Introduzca palabra`)
+if(names.includes(name)){
+alert(`palabra repetida, no válida`)
+}else if (name === ""){
+
+}else{
+    names.push(name);
+}
+}
+names.sort();
+
+alert(`Las palabras en orden alfabético son: 
+${names}`)
+
+break;
+case "7":
+alert(`Crear un escript que muestre una palabra
+o frase ingresas al revés y que indique cúantas
+letras y espacios tiene`)
+
+let script, esp = 0, arr = new Array
+
+script=prompt(`Ingrese palabra o frase`);
+arr = script.split("");
+arr.reverse();
+script = arr.join("");
+
+for(i=0; i<arr.length; i++){
+    if(arr[i]===" "){
+        esp++;
+    }
+}
+
+alert(`La palabra al reves es ${script}
+tiene ${esp} espacios y ${arr.length - esp} letras
+`)
+
+break;
+
+default:
+alert(`opción no válida`);
+break;
+}
+</script>
+</body>
+</html>

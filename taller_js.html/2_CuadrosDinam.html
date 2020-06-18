@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIVs Dinámicos</title>
+  <style>
+    #menu {
+      position: relative;
+      text-align: center;
+      padding: 10px 10% 0px 5%;
+      width: 100%;
+    }
+
+    .btn {
+      height: 30px;
+      width: 50px;
+      color: white;
+      font-size: 16 px;
+      background-color: #4CAF50;
+      border-radius: 5%;
+      border-color: white;
+      padding: 10px 32px 15px 32px;
+      margin: 5px 5px 5px 5px;
+      display: inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .btn:hover {
+      background-color: green;
+      opacity: 0.8;
+    }
+
+    .btn:active {
+      background-color: green;
+      opacity: 1;
+    }
+
+    .divRes {
+      height: 20px;
+      width: 50px;
+      background-color: blue;
+      color: white;
+      text-align: center;
+      vertical-align: center;
+      margin: 3px 3px 3px 3px;
+      display: inline-block;
+    }
+
+    .divs {
+      position: absolute;
+      text-align: center;
+      margin-top: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="menu">
+    <div class="btn" id="agregar">Agregar uno</div>
+    <div class="btn" id="eliminar">Eliminar uno</div>
+    <div class="btn" id="eliminarPar">Eliminar pares</div>
+    <div class="btn" id="eliminarImpar">Eliminar impares</div>
+    <div class="btn" id="eliminarAll">Eliminar todos</div>
+  </div>
+  <div id="divs"></div>
+
+  <script>
+    /*Programa los siguientes botones por medio de JavaScript que realicen las siguientes
+  funciones:
+  - Un botón que nos permita agregar de manera secuencial los divs.
+  - Un botón que nos permita eliminar todos los divs.
+  - Un botón que nos permita eliminar todos los divs impares.
+  - Un botón que nos permita eliminar el div que el usuario desee.
+  NOTA: Se debe mantener la secuencia de divs una vez de haya eliminado el último.*/
+
+    let parent = document.getElementById('divs')
+    let btnAgregar = document.getElementById('agregar');
+    let btnEliminar = document.getElementById('eliminar');
+    let btnEliminarPares = document.getElementById('eliminarPar');
+    let btnEliminarImpares = document.getElementById('eliminarImpar');
+    let btnEliminarAll = document.getElementById('eliminarAll'); 
+    let content, div, divs = [], num = 1, i
+
+
+    btnAgregar.addEventListener('click', () => {
+      div = document.createElement('div')
+      content = document.createTextNode(num);
+      div.appendChild(content);
+      div.classList.add('divRes');
+      parent.appendChild(div);
+      num++;
+    })
+
+    btnEliminar.addEventListener('click', () => {
+      divs = document.getElementsByClassName('divRes');
+      if (divs.length > 0) {
+        parent.removeChild(divs[divs.length - 1]);
+            num--;
+          }
+    })
+
+    btnEliminarImpares.addEventListener('click', () => {
+      divs = document.getElementsByClassName('divRes');
+      if (divs.length > 0) {
+        for (i = 0; i < divs.length; i++) {
+          if ((Number(divs[i].innerHTML)) % 2 !== 0) {
+            parent.removeChild(divs[i]);
+          }
+        }
+      }
+    })
+
+    btnEliminarPares.addEventListener('click', () => {
+      divs = document.getElementsByClassName('divRes');
+      if (divs.length > 0) {
+        for (i = 0; i < divs.length; i++) {
+            if ((Number(divs[i].innerHTML)) % 2 === 0) {
+            parent.removeChild(divs[i]);
+          }
+        }
+      }
+    })
+
+    btnEliminarAll.addEventListener('click', () => { 
+      parent.innerHTML="";
+      divs = [];
+      num = 1;
+    }
+  </script>
+</body>
+
+</html>

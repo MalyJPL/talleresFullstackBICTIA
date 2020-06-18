@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar fondo</title>
+<style>
+    .btn{
+        height: 50px;
+        width: 50px;
+        border: 2px solid pink;
+        padding: 5px 5px 5px 5px;
+        margin: 5px 5px 5px 5px;
+        display:inline-block;
+    }
+    .btn:hover {
+      border: none;
+    }
+</style>
+
+</head>
+<body id="todo">
+    <div id="menu">
+            </div>
+    <script>
+        /*
+        Realiza una página que muestre cinco cuadrados de diferentes colores. Cuando el
+mouse pase por encima de alguno de ellos el color de fondo será del color de relleno
+del cuadrado.
+*/
+let colores = new Array('red', 'blue', 'green', 'yellow', 'white', 'black');
+let menu = document .getElementById('menu');
+
+
+colores .forEach ( color =>{
+let boton = document .createElement('div');
+     boton.setAttribute('class', 'btn');
+     boton.setAttribute('onmouseover',"cambiarFondo('"+color+"')");
+     boton.style.background=color;
+     menu.appendChild(boton)
+})
+
+
+function cambiarFondo(fondo){
+    let body = document.getElementById("todo");
+    body.style.background= fondo;
+}
+    </script>
+
+</body>
+</html>

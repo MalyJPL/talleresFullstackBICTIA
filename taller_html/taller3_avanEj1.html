@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda La Buena</title>
+</head>
+<body>
+<div id="resultados">
+
+</div>
+   <script>
+ 
+/*     Cinco cajeros realizan su jornada laboral de 8 horas diarias. Al trabajar
+    80 días el supermercado desea hacerles saber lo siguiente: 
+    -Total de ventas de todos lo cajeros
+    -Quien fue el cajero que vendió más (total de ventas de un solo cajero)
+    - En que día se vendió más y quien fue el cajero responsable ese día 
+    - Mostrar el cajero que menos ventas hizo en el día 60
+    - Mostrar el mejor y el peor cajero del día 30.
+  */
+
+//Obtener datos: día de venta, nombre del cajero, costo de venta
+//clase dato
+
+  class Venta {
+            constructor(dia, vendedor, venta) {
+                this.dia = dia;
+                this.vendedor = vendedor;
+                this.venta = venta;
+            }
+  }
+
+//generar datos random
+let vendedores = ["Pedro", "Juan", "Diana", "Juana", "León"]
+let ventas = [], aux;
+for(let j=0; j<vendedores.length;j++){
+for(i=1; i<=60;i++){
+aux = new Venta(i, vendedores[j], (100000-1000)*Math.random());
+   ventas.push(aux); 
+  }
+}
+
+
+// Suma de las ventas
+let sumaVentas = 0;
+for(i=0;i<ventas.length;i++){
+sumaVentas += ventas[i].venta;
+}
+sumaVentas = sumaVentas;
+
+let padre = document.getElementById("resultados")
+let elemento = document.createElement("div")
+let contenido = document.createTextNode(`-El total de ventas es ${new Intl.NumberFormat("de-DE", {style: "currency", currency: "COP"}).format(sumaVentas)}`);
+
+elemento.appendChild(contenido);
+padre.appendChild(elemento);
+
+//Sume delas ventas de cada cajero y determinar cúal es mayor
+let ventasVendedores = []
+for(j=0; j<vendedores.length;j++){
+  ventasVendedores[j] = 0;
+for(i=0; i<ventas.length; i++) {
+         if(ventas[i].vendedor === vendedores[j] )
+ ventasVendedores[j] += Number(ventas[i].venta)
+ }
+};
+
+
+let mejor = 0
+
+for(i=0;i<ventasVendedores.length;i++){
+  if(i !==0 && ventasVendedores[i-1] < ventasVendedores[i]){
+    mejor = i;
+  } 
+}
+
+ elemento = document.createElement("div")
+contenido = document.createTextNode(`-El mayor vendedor es ${vendedores[mejor]} y vendió ${new Intl.NumberFormat("de-DE", {style: "currency", currency: "COP"}).format(ventasVendedores[mejor])}`);
+elemento.appendChild(contenido);
+padre.appendChild(elemento);
+//función que sume las ventas de cada día, y para ese día, sume las ventas de//cada cajero
+//Sume delas ventas de cada cajero y determinar cúal es mayor
+let ventasDia = [] , mejorDia = 0, dia
+
+for(let dia=1; dia<=60;dia++){
+  ventasDia[dia] = 0;
+for(i=0; i<ventas.length; i++) {
+         if(ventas[i].dia === dia )
+ ventasDia[dia] += Number(ventas[i].venta)
+ }
+if(dia !==1 && ventasDia[dia-2] < ventasDia[dia-1]){
+  mejorDia = dia
+}
+};
+
+let mejorVendedor = masVentas(mejorDia, ventas, vendedores, "mejor")
+
+elemento = document.createElement("div")
+contenido = document.createTextNode(`-El mejor día es ${mejorDia} y el mejor vendedor de ese día es ${vendedores[mejorVendedor]}`);
+elemento.appendChild(contenido);
+padre.appendChild(elemento);
+
+
+//funcion que busque el día 60 y calcule que cajero hizo menos ventas
+function masVentas(dia, ventas, vendedores, tipo){
+  let ventasVendedores = [], selec
+for(j=0; j<vendedores.length;j++){
+  ventasVendedores[j] = 0;
+  for(i=0;i<ventas.length;i++){
+    if(ventas[i].dia === dia && ventas[i].vendedor === vendedores[j]){
+ventasVendedores[j] += ventas[i].venta;
+
+}
+  }
+  
+}
+
+if (tipo === "mejor"){
+for(i=0;i<ventasVendedores.length;i++){
+  if(i !==0 && ventasVendedores[i-1] < ventasVendedores[i]){
+    selec = i;
+  } 
+}
+}
+if (tipo === "peor"){
+for(i=0;i<ventasVendedores.length;i++){
+  if(i !==0 && ventasVendedores[i-1] > ventasVendedores[i]){
+    selec = i;
+  } 
+}
+}
+return selec
+}
+
+
+let cual = masVentas(60, ventas, vendedores, "peor")
+
+
+elemento = document.createElement("div")
+contenido = document.createTextNode(`-Para el día 60 el peor vendedor es ${vendedores[cual]}`);
+elemento.appendChild(contenido);
+padre.appendChild(elemento);
+
+
+
+
+//función que busque el día 30 y calcule el cajero que hizo más ventas y menos ventas
+let cualM = masVentas(30, ventas, vendedores, "mejor")
+let cualP = masVentas(30, ventas, vendedores, "peor")
+
+elemento = document.createElement("div")
+contenido = document.createTextNode(`-Para el día 30 el mejor vendedor es ${vendedores[cualM]} y el peor es ${vendedores[cualP]}`);
+elemento.appendChild(contenido);
+padre.appendChild(elemento);
+
+
+
+</script>
+</body>
+</html>
